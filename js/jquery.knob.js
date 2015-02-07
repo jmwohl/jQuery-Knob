@@ -507,6 +507,7 @@
         this.extend = function () {
             this.o = $.extend({
                 bgColor: this.$.data('bgcolor') || '#EEEEEE',
+                fillColor: this.$.data('fillcolor') || 'none',
                 angleOffset: this.$.data('angleoffset') || 0,
                 angleArc: this.$.data('anglearc') || 360,
                 inline: true
@@ -763,6 +764,15 @@
 
             c.lineWidth = this.lineWidth;
             c.lineCap = this.lineCap;
+
+            if (this.o.fillColor !== "none") {
+                c.beginPath();
+                    c.fillStyle = this.o.fillColor;
+                    c.strokeStyle = this.o.bgColor;
+                    c.arc(this.xy, this.xy, this.radius, this.endAngle - 0.00001, this.startAngle + 0.00001, true);
+                    c.fill();
+                c.stroke();
+            }
 
             if (this.o.bgColor !== "none") {
                 c.beginPath();
